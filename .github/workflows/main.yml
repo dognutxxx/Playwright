@@ -24,7 +24,7 @@ jobs:
           path: build
   deploy:
     name: Deploy
-    needs: [test,build]
+    needs: [test, build]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
@@ -33,7 +33,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: build
-          path: build
+          path: dist
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
