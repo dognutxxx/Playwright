@@ -62,7 +62,7 @@ jobs:
           retention-days: 30
  docker:
     runs-on: ubuntu-latest
-    [test, build]
+    needs: [test, build]
     steps:
       -
         name: Set up QEMU
