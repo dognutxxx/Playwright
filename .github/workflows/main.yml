@@ -4,24 +4,24 @@ on:
     branches:
       - main
 jobs:
-  build:
-    name: Build
-    runs-on: ubuntu-latest
-    needs: [test]
-    steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v2.3.2
-      - name: Install Dependencies
-        run: npm install
-      - name: Build
-        env:
-          CI: true
-        run: npm run build
-      - name: Archive Production Artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: build
-          path: build
+  # build:
+  #   name: Build
+  #   runs-on: ubuntu-latest
+  #   needs: [test]
+  #   steps:
+  #     - name: Checkout Repo
+  #       uses: actions/checkout@v2.3.2
+  #     - name: Install Dependencies
+  #       run: npm install
+  #     - name: Build
+  #       env:
+  #         CI: true
+  #       run: npm run build
+  #     - name: Archive Production Artifact
+  #       uses: actions/upload-artifact@v2
+  #       with:
+  #         name: build
+  #         path: build
   # deploy:
   #   name: Deploy
   #   needs: [test, build]
