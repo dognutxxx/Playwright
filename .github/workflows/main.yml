@@ -70,10 +70,4 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Build and Push Docker Image
-        uses: mr-smithers-excellent/docker-build-push@v4
-        with:
-          image: arnonprommoon/docker
-          registry: docker.io
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+  
