@@ -74,8 +74,6 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Build and push
-        uses: docker/build-push-action@v4
-        with:
-          push: true
-          tags: user/app:latest
+      - uses: actions/checkout@v2
+      - name: Build the Docker image
+        run: docker run -d -p 80:80 docker/getting-started
