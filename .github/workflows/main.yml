@@ -4,24 +4,24 @@ on:
     branches:
       - main
 jobs:
-  # build:
-  #   name: Build
-  #   runs-on: ubuntu-latest
-  #   needs: [test]
-  #   steps:
-  #     - name: Checkout Repo
-  #       uses: actions/checkout@v2.3.2
-  #     - name: Install Dependencies
-  #       run: npm install
-  #     - name: Build
-  #       env:
-  #         CI: true
-  #       run: npm run build
-  #     - name: Archive Production Artifact
-  #       uses: actions/upload-artifact@v2
-  #       with:
-  #         name: build
-  #         path: build
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    needs: [test]
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2.3.2
+      - name: Install Dependencies
+        run: npm install
+      - name: Build
+        env:
+          CI: true
+        run: npm run build
+      - name: Archive Production Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: build
+          path: build
   # deploy:
   #   name: Deploy
   #   needs: [test, build]
@@ -40,36 +40,36 @@ jobs:
   #         args: deploy --only hosting
   #       env:
   #         FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-  # test:
-  #   timeout-minutes: 60
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #     - uses: actions/setup-node@v3
-  #       with:
-  #         node-version: 16
-  #     - name: Install dependencies
-  #       run: npm ci
-  #     - name: Install Playwright Browsers
-  #       run: npx playwright install --with-deps
-  #     - name: Run Playwright tests
-  #       run: npx playwright test
-  #     - uses: actions/upload-artifact@v3
-  #       if: always()
-  #       with:
-  #         name: playwright-report
-  #         path: playwright-report/
-  #         retention-days: 30
-  docker:
+  test:
+    timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Build and Push Docker Image
-        uses: mr-smithers-excellent/docker-build-push@v4
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          image: arnonprommoon/docker
-          registry: docker.io
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          node-version: 16
+      - name: Install dependencies
+        run: npm ci
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+      - name: Run Playwright tests
+        run: npx playwright test
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
+  # docker:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v3
+  #     - name: Build and Push Docker Image
+  #       uses: mr-smithers-excellent/docker-build-push@v4
+  #       with:
+  #         image: arnonprommoon/docker
+  #         registry: docker.io
+  #         username: ${{ secrets.DOCKER_USERNAME }}
+  #         password: ${{ secrets.DOCKER_PASSWORD }}
         
