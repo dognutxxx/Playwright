@@ -75,7 +75,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - uses: actions/checkout@v2
-       - name: Start container
+      - name: Start container
         uses: docker/build-push-action@v2
         with:
           context: .
